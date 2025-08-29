@@ -1,3 +1,4 @@
+from collections import deque
 from queue import Queue
 
 import hashlib
@@ -33,11 +34,15 @@ def process_request():
 # Check if string is palindrome
 def is_palindrome(s):
     cleaned = ''.join(c.lower() for c in s if c.isalnum())
-    # Check if the cleaned string is equal to its reverse
-    if cleaned == cleaned[::-1]:
-        print(f"'{s}' is a palindrome.")
-    else:
-        print(f"'{s}' is not a palindrome.")
+
+    d = deque(cleaned)
+    # Check if the cleaned string is a palindrome
+    while len(d) > 1:
+        if d.popleft() != d.pop():
+            print(f"'{s}' is not a palindrome.")
+            return
+    
+    print(f"'{s}' is a palindrome.")
 
 strings = [
     "madam",
