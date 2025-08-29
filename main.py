@@ -30,11 +30,44 @@ def process_request():
     else:
         print("No requests to process.")
 
-while True:
-    # Generate some requests
-    for _ in range(5):
-        time.sleep(1)
-        generate_request()
+# Check if string is palindrome
+def is_palindrome(s):
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    # Check if the cleaned string is equal to its reverse
+    if cleaned == cleaned[::-1]:
+        print(f"'{s}' is a palindrome.")
+    else:
+        print(f"'{s}' is not a palindrome.")
 
-    # Run requests processing
-    process_request()
+strings = [
+    "madam",
+    "racecar",
+    "hello",
+    "world",
+    "level",
+    "notapalindrome",
+    "openai",
+    "python",
+    "rotor",
+    "civic"
+]
+
+def main():
+    all_strings_tested = False
+    while True:
+        # Test strings for palindrome
+        if not all_strings_tested:
+            for s in strings:
+                time.sleep(1)
+                is_palindrome(s)
+        all_strings_tested = True
+        # Generate some requests
+        for _ in range(5):
+            time.sleep(1)
+            generate_request()
+
+        # Run requests processing
+        process_request()
+
+if __name__ == "__main__":
+    main()
